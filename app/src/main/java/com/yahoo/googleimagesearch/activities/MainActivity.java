@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -23,8 +24,8 @@ import org.json.JSONObject;
 
 import com.yahoo.googleimagesearch.R;
 import com.yahoo.googleimagesearch.adapters.ImageResultAdapter;
+import com.yahoo.googleimagesearch.libs.EndlessScrollListener;
 import com.yahoo.googleimagesearch.models.ImageResult;
-import com.yahoo.googleimagesearch.activities.ImageDisplayActivity;
 
 import java.util.ArrayList;
 
@@ -59,6 +60,12 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
+        gvResults.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                fetchData((page - 1) * 8);
+            }
+        });
     }
 
     @Override
@@ -84,11 +91,19 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onImageSearch(View v) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        
+        fetchData(0);
+    }
+
+    private void fetchData(int offset) {
         String query = etQuery.getText().toString();
 
         AsyncHttpClient client = new AsyncHttpClient();
         String baseUrl = getString(R.string.baseurl);
-        String searchUrl = baseUrl + "&q=" + query + "&rsz=8";
+        String searchUrl = baseUrl + "&q=" + query + "&rsz=8&start=" + offset;
+
         while (this.isNetworkAvailable()) {
             client.get(searchUrl, new JsonHttpResponseHandler() {
                 @Override
@@ -96,7 +111,7 @@ public class MainActivity extends ActionBarActivity {
                     JSONArray imageResultJson = null;
                     try {
                         imageResultJson = response.getJSONObject("responseData").getJSONArray("results");
-                        imageResults.clear();
+                        // imageResults.clear();
                         aImageResults.addAll(ImageResult.fromJSONArray(imageResultJson));
                     } catch (Exception e) {
                         e.printStackTrace();
