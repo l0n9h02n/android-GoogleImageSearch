@@ -1,6 +1,9 @@
 package com.yahoo.googleimagesearch.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +27,6 @@ import com.yahoo.googleimagesearch.models.ImageResult;
 import com.yahoo.googleimagesearch.activities.ImageDisplayActivity;
 
 import java.util.ArrayList;
-
-
 
 
 public class MainActivity extends ActionBarActivity {
@@ -86,21 +87,31 @@ public class MainActivity extends ActionBarActivity {
         String query = etQuery.getText().toString();
 
         AsyncHttpClient client = new AsyncHttpClient();
-        String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
-        client.get(searchUrl, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.i("eric", response.toString());
-                JSONArray imageResultJson = null;
-                try {
-                    imageResultJson = response.getJSONObject("responseData").getJSONArray("results");
-                    imageResults.clear();
-                    aImageResults.addAll(ImageResult.fromJSONArray(imageResultJson));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        String baseUrl = getString(R.string.baseurl);
+        String searchUrl = baseUrl + "&q=" + query + "&rsz=8";
+        while (this.isNetworkAvailable()) {
+            client.get(searchUrl, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    JSONArray imageResultJson = null;
+                    try {
+                        imageResultJson = response.getJSONObject("responseData").getJSONArray("results");
+                        imageResults.clear();
+                        aImageResults.addAll(ImageResult.fromJSONArray(imageResultJson));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-            }
-        });
+                }
+            });
+            break;
+        }
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

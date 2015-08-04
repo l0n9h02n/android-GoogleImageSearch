@@ -7,4 +7,5 @@
     <string name="search_label">Search</string>
     <string name="image_title">Image Title</string>
     <string name="title_activity_image_display">Full Image</string>
+    <string name="baseurl">https://ajax.googleapis.com/ajax/services/search/images?v=1.0</string>
 </resources>
