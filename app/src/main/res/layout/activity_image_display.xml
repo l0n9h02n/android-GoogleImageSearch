@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yahoo.googleimagesearch.activities.ImageDisplayActivity">
+    tools:context="com.yahoo.googleimagesearch.activities.ImageDisplayActivity"
+    android:background="#000000">
 
     <ImageView
         android:id="@+id/ivImageResult"

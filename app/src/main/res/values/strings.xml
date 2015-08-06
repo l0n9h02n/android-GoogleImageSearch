@@ -8,4 +8,13 @@
     <string name="image_title">Image Title</string>
     <string name="title_activity_image_display">Full Image</string>
     <string name="baseurl">https://ajax.googleapis.com/ajax/services/search/images?v=1.0</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_options">Advanced search options</string>
+    <string name="option_size">Image Size</string>
+    <string name="option_color">Color Filter</string>
+    <string name="option_type">Image Type</string>
+    <string name="option_site">Site filter</string>
+    <string name="settings_dialog_title">Search Settings</string>
 </resources>

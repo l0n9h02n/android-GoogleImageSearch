@@ -1,4 +1,4 @@
-package com.yahoo.googleimagesearch.libs;
+package com.yahoo.googleimagesearch.helpers;
 
 import android.widget.AbsListView;
 

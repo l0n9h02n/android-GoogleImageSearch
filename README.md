@@ -9,22 +9,22 @@ Time spent: **5** hours spent in total
 The following **required** functionality is completed:
 
 * [x] User can **search for images** by specifying a query and launching a search. Search displays a grid of image results from the Google Image API.
-* [ ] User can click on "settings" which allows selection of **advanced search options** to filter results
-* [ ] User can configure advanced search filters such as:
-  * [ ] Size (small, medium, large, extra-large)
-  * [ ] Color filter (black, blue, brown, gray, green, etc...)
-  * [ ] Type (faces, photo, clip art, line art)
-  * [ ] Site (espn.com)
-* [ ] Subsequent searches have any filters applied to the search results
+* [x] User can click on "settings" which allows selection of **advanced search options** to filter results
+* [x] User can configure advanced search filters such as:
+  * [x] Size (small, medium, large, extra-large)
+  * [x] Color filter (black, blue, brown, gray, green, etc...)
+  * [x] Type (faces, photo, clip art, line art)
+  * [x] Site (espn.com)
+* [x] Subsequent searches have any filters applied to the search results
 * [x] User can tap on any image in results to see the image **full-screen**
 * [x] User can **scroll down to see more images**. The maximum number of images is 64 (limited by API).
 
 The following **optional** features are implemented:
 
-* [ ] Implements robust error handling, [check if internet is available](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#checking-for-network-connectivity), handle error cases, network failures
-* [ ] Used the **ActionBar SearchView** or custom layout as the query box instead of an EditText
+* [x] Implements robust error handling, [check if internet is available](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#checking-for-network-connectivity), handle error cases, network failures
+* [x] Used the **ActionBar SearchView** or custom layout as the query box instead of an EditText
 * [ ] User can **share an image** to their friends or email it to themselves
-* [ ] Replaced Filter Settings Activity with a lightweight modal overlay
+* [x] Replaced Filter Settings Activity with a lightweight modal overlay
 * [ ] Improved the user interface and experiment with image assets and/or styling and coloring
 
 The following **bonus** features are implemented:
